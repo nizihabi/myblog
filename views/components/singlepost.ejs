@@ -1,0 +1,35 @@
+<div class="post-content">
+    <h1><a href="/posts/<%= post._id %>"><%= post.title %></a></h1>
+    <div class="ui grid">
+        <div class="two wide column">
+            <a class="avatar" href="/posts?author=<%=post.author._id%>" data-title="<%= ({m: '男', f: '女', x: '保密'})[post.author.gender] %>"
+                data-content="<%= post.author.bio %>">
+                <img class="ui circular image" src="/img/<%= post.author.avatar %>">
+            </a>
+            <h3 class="avatarName"> <%= post.author.name %> </h3>
+        </div>
+        <div class="twelve wide column">
+            <div class="ui stacked segment">
+                <pre> <%- post.content %></pre>
+                <div>
+                    <span class="tag"><%= post.created_at%></span>
+                    <span class="tag right">
+                        <span>浏览(<%= post.pv%>)</span>
+                        <span>留言(<%= post.commentsCount%>)</span>
+                        <% if (user && post.author._id && user._id.toString()===post.author._id.toString() ){%>
+                            <div class="ui inline dropdown">
+                                <div class="text"></div>
+                                <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <div class="item"><a href="/posts/<%= post._id %>/edit">编辑</a></div>
+                                    <div class="item"><a href="/posts/<%= post._id %>/remove">删除</a></div>
+                                </div>
+                            </div>
+                        <% }%>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
